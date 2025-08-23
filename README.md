@@ -20,6 +20,14 @@ Real-time autonomous navigation and target detection for contested environments.
 - **FPS (Frames Per Second)**: Processing speed - 1577 FPS means the system can track supersonic threats and react faster than human reflexes
 - **Tracking Success**: Maintains continuous lock on moving targets - 100% success prevents threats from escaping detection during evasive maneuvers
 
+### 🌡️ Thermal Imaging Clarification:
+**IMPORTANT**: Thermal values in code are **8-bit digital values (0-255)**, NOT celsius temperatures:
+- Personnel detection at "200-240" = **actual 30-37°C** (normal body heat)
+- Vehicle engines at "230-255" = **actual 40-80°C** (warm engines)  
+- Ambient background at "80-120" = **actual 15-25°C** (room temperature)
+
+*Digital value 200 ≠ 200°C (which would be fatal!) - it represents normal human body temperature.*
+
 ## 🎬 Professional Demo Videos
 
 ### 🌙 Low-Light SLAM Demonstration (RECOMMENDED)

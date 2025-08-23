@@ -31,12 +31,14 @@ class WorkingThermalDetector:
     def __init__(self, mode: str = "balanced"):
         self.mode = mode
         
-        # Temperature thresholds for different threat types
+        # Digital value thresholds for different threat types
+        # NOTE: These are 8-bit digital values (0-255), NOT celsius temperatures!
+        # Actual temps: personnel ~35°C, vehicles ~60°C, ambient ~20°C
         self.temp_thresholds = {
-            "vehicle": {"min": 180, "max": 255, "min_area": 1000, "max_area": 15000},
-            "personnel": {"min": 200, "max": 240, "min_area": 200, "max_area": 2000},
-            "equipment": {"min": 160, "max": 200, "min_area": 500, "max_area": 8000},
-            "aircraft": {"min": 190, "max": 255, "min_area": 2000, "max_area": 25000}
+            "vehicle": {"min": 180, "max": 255, "min_area": 1000, "max_area": 15000},      # ~40-80°C actual
+            "personnel": {"min": 200, "max": 240, "min_area": 200, "max_area": 2000},      # ~30-37°C actual  
+            "equipment": {"min": 160, "max": 200, "min_area": 500, "max_area": 8000},      # ~25-40°C actual
+            "aircraft": {"min": 190, "max": 255, "min_area": 2000, "max_area": 25000}      # ~40-100°C actual
         }
         
         # Processing parameters based on mode
@@ -152,18 +154,21 @@ class WorkingThermalDetector:
             aspect_ratio = hotspot['aspect_ratio']
             bbox = hotspot['bbox']
             
-            # Classification logic based on thermal characteristics
+            # Classification logic based on thermal digital values
+            # NOTE: mean_temp/max_temp are digital values (0-255), not actual celsius!
             class_name = "unknown"
             confidence = 0.0
             
-            # Vehicle detection (large, hot, rectangular)
+            # Vehicle detection (large, warm signature, rectangular)
+            # Digital values 180-255 ≈ actual temps 40-80°C (warm engines/metal)
             if (area >= 1000 and area <= 15000 and 
                 mean_temp >= 180 and max_temp >= 200 and
                 aspect_ratio > 1.2):
                 class_name = "hostile_vehicle"
                 confidence = min(0.9, 0.4 + (mean_temp - 180) / 100)
                 
-            # Personnel detection (medium size, body temp, vertical)
+            # Personnel detection (medium size, body heat signature, vertical)
+            # Digital values 200-240 ≈ actual temps 30-37°C (human body heat)
             elif (area >= 200 and area <= 2000 and
                   mean_temp >= 200 and max_temp >= 210 and
                   0.3 <= aspect_ratio <= 1.5):
