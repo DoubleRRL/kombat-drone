@@ -30,9 +30,9 @@ class OptimizedMultiModalPipeline:
     
     def __init__(self, 
                  enable_parallel: bool = True,
-                 enable_frame_skip: bool = True,
-                 detection_interval: int = 3,  # Run detection every N frames
-                 slam_interval: int = 1,       # Run SLAM every N frames
+                 enable_frame_skip: bool = False,  # DISABLED: Critical for threat detection
+                 detection_interval: int = 1,     # Process every frame for combat
+                 slam_interval: int = 1,          # Process every frame for combat
                  use_half_precision: bool = True):
         
         self.enable_parallel = enable_parallel
