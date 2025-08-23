@@ -137,22 +137,34 @@ class ThermalYOLO:
     Handles vehicles, personnel, and infrastructure in thermal imagery
     """
     
-    def __init__(self, model_path: str = "yolov8n.pt", device: str = "auto"):
+    def __init__(self, model_path: str = "yolov8n.pt", device: str = "auto", half_precision: bool = False):
         """
         Initialize thermal YOLO detector
         
         Args:
             model_path: Path to trained model weights
             device: Device for inference ("auto", "cpu", "cuda", "mps")
+            half_precision: Use FP16 inference for speed (GPU only)
         """
         self.model_path = model_path
         self.device = self._select_device(device)
+        self.half_precision = half_precision and self.device != "cpu"
         
         # Load model
         try:
             self.model = YOLO(model_path)
             self.model.to(self.device)
-            print(f"Loaded thermal YOLO model from {model_path} on {self.device}")
+            
+            # Enable half precision if requested and supported
+            if self.half_precision:
+                try:
+                    self.model.half()
+                    print(f"Loaded thermal YOLO model from {model_path} on {self.device} (FP16)")
+                except:
+                    self.half_precision = False
+                    print(f"Loaded thermal YOLO model from {model_path} on {self.device} (FP16 not supported)")
+            else:
+                print(f"Loaded thermal YOLO model from {model_path} on {self.device}")
         except Exception as e:
             print(f"Failed to load model {model_path}, falling back to pretrained")
             self.model = YOLO("yolov8n.pt")  # Fallback to pretrained
