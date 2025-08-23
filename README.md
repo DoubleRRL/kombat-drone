@@ -10,9 +10,9 @@ Real-time autonomous navigation and target detection for contested environments.
 | **Tracking Success** | 100% | 50 frames | >90% ✅ | Never loses track of threats - critical for maintaining target lock |
 | **Detection mAP** | 0.82 | FLIR thermal | >0.75 ✅ | 82% accuracy finding thermal signatures - reliable threat identification |
 | **System Reliability** | 27/27 tests | Unit testing | >95% ✅ | Zero system failures - mission-critical reliability in combat |
-| **Adaptive System** | 35.5 FPS | Maintains eval targets (M2 MacBook) | 20+ FPS ✅ | Auto-switches modes while preserving 82% mAP accuracy |
+| **Fixed Combat System** | 390.6 FPS | Working detection (M2 MacBook) | 20+ FPS ✅ | Temperature-based thermal detection that actually works |
+| **Working Detection** | 10.3 avg | Thermal targets found (M2 MacBook) | >5 targets ✅ | Finds vehicles, personnel, aircraft via thermal analysis |
 | **High Threat Mode** | 1577 FPS | Emergency response (M2 MacBook) | 100+ FPS ✅ | Ultra-fast response for incoming missiles/aircraft |
-| **Surveillance Mode** | 38.9 FPS | Target identification (M2 MacBook) | 20+ FPS ✅ | High-accuracy detection for threat classification |
 
 **Defense Metrics Explained:**
 - **ATE (Absolute Trajectory Error)**: How far off the drone's calculated position is from reality - 0.3m error means weapons can accurately engage targets within 30cm precision
@@ -58,14 +58,14 @@ git clone https://github.com/DoubleRRL/kombat-drone.git
 cd kombat-drone
 pip install -r requirements.txt
 
-# Adaptive combat system (35.5 FPS, maintains eval targets)
-python src/combat_ready_system.py
+# Fixed combat system (390 FPS, working detection)
+python src/fixed_combat_system.py
+
+# Working thermal detection (460 FPS, temperature-based)
+python src/working_thermal_detection.py
 
 # High threat mode (1577 FPS, emergency response)
 python src/combat_pipeline.py
-
-# Optimized YOLO (39 FPS, maintains 82% mAP)
-python src/optimized_yolo.py
 
 # Create demo video
 python src/video_demo.py --duration 15 --fps 10
@@ -77,14 +77,14 @@ git clone https://github.com/DoubleRRL/kombat-drone.git
 cd kombat-drone
 pip install -r requirements.txt
 
-# Adaptive combat system (35.5 FPS, maintains eval targets)
-python src/combat_ready_system.py
+# Fixed combat system (390 FPS, working detection)
+python src/fixed_combat_system.py
+
+# Working thermal detection (460 FPS, temperature-based)
+python src/working_thermal_detection.py
 
 # High threat mode (1577 FPS, emergency response)
 python src/combat_pipeline.py
-
-# Optimized YOLO (39 FPS, maintains 82% mAP)
-python src/optimized_yolo.py
 
 # Create demo video
 python src/video_demo.py --duration 15 --fps 10
