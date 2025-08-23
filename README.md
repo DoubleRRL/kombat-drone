@@ -20,22 +20,35 @@ Real-time autonomous navigation and target detection for contested environments.
 - **FPS (Frames Per Second)**: Processing speed - 1577 FPS means the system can track supersonic threats and react faster than human reflexes
 - **Tracking Success**: Maintains continuous lock on moving targets - 100% success prevents threats from escaping detection during evasive maneuvers
 
-## 🎬 Professional Demo Video
+## 🎬 Professional Demo Videos
 
-**For Recruiters & Technical Interviews:**
+### 🌙 Low-Light SLAM Demonstration (RECOMMENDED)
+**Shows the critical value of thermal-visual SLAM in contested environments:**
 ```bash
-# Generate professional demonstration video (Full HD, 40 seconds)
+# Generate low-light SLAM demo (Full HD, 48 seconds)
+python src/lowlight_slam_demo.py
+```
+
+**SLAM Value Highlights:**
+- ✅ **RGB Camera Failure**: Complete darkness, smoke, fog conditions where RGB fails
+- ✅ **Thermal SLAM Success**: Maintains navigation with thermal feature tracking
+- ✅ **Side-by-Side Comparison**: RGB-only SLAM failure vs Thermal-Visual success  
+- ✅ **Contested Environment Operation**: Smoke penetration, night ops, urban canyons
+- ✅ **Mission Continuity**: GPS-denied navigation when conventional systems fail
+
+**Output**: `lowlight_slam_professional_demo.mp4` - **Perfect for demonstrating SLAM implementation value**
+
+### 💼 General Technical Demo  
+**For broader technical capabilities showcase:**
+```bash
+# Generate general demonstration video (Full HD, 40 seconds)
 python src/recruiter_demo.py
 ```
 
-**Video Highlights:**
+**Technical Highlights:**
 - ✅ **Real-time Performance**: 35.5 FPS with live metrics display
 - ✅ **Multiple Threat Scenarios**: Vehicle detection, personnel tracking, emergency response
-- ✅ **Technical Sophistication**: Adaptive mode switching, sensor fusion, thermal analysis
 - ✅ **Production Ready**: Meets all evaluation targets (82% mAP, 0.3m accuracy, 100% reliability)
-- ✅ **Professional UI**: Branded interface with performance metrics and system status
-
-**Output**: `combat_slam_professional_demo.mp4` - Ready for presentation to hiring managers and technical teams.
 
 ## Quick Deploy
 
