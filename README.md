@@ -36,7 +36,7 @@ python src/lowlight_slam_demo.py
 - ✅ **Contested Environment Operation**: Smoke penetration, night ops, urban canyons
 - ✅ **Mission Continuity**: GPS-denied navigation when conventional systems fail
 
-**Output**: `lowlight_slam_professional_demo.mp4` - **Perfect for demonstrating SLAM implementation value**
+**Output**: `demo_videos/lowlight_slam_professional_demo.mp4` - **Perfect for demonstrating SLAM implementation value**
 
 ### 💼 General Technical Demo  
 **For broader technical capabilities showcase:**
@@ -67,7 +67,7 @@ python src/working_thermal_detection.py
 # High threat mode (1577 FPS, emergency response)
 python src/combat_pipeline.py
 
-# Create demo video
+# Create demo video (saved to demo_videos/)
 python src/video_demo.py --duration 15 --fps 10
 ```
 
@@ -86,7 +86,7 @@ python src/working_thermal_detection.py
 # High threat mode (1577 FPS, emergency response)
 python src/combat_pipeline.py
 
-# Create demo video
+# Create demo video (saved to demo_videos/)
 python src/video_demo.py --duration 15 --fps 10
 ```
 

@@ -54,6 +54,11 @@ models/*.pt
 models/*.pth
 models/*.onnx
 
+# Demo videos (large files)
+demo_videos/*.mp4
+demo_videos/*.avi
+demo_videos/*.mov
+
 # Temporary files
 tmp/
 temp/

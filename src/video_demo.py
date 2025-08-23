@@ -16,7 +16,7 @@ from detection.thermal_yolo import visualize_detections
 class VideoDemo:
     """Create demonstration videos of the SLAM system"""
     
-    def __init__(self, output_path: str = "demo_output.mp4", fps: int = 10):
+    def __init__(self, output_path: str = "demo_videos/demo_output.mp4", fps: int = 10):
         self.output_path = output_path
         self.fps = fps
         self.pipeline = None

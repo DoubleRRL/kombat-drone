@@ -31,7 +31,7 @@ class LowLightSLAMDemo:
     Shows why conventional RGB-only systems fail in contested environments
     """
     
-    def __init__(self, output_path: str = "lowlight_slam_demo.mp4"):
+    def __init__(self, output_path: str = "demo_videos/lowlight_slam_demo.mp4"):
         self.output_path = output_path
         self.video_writer = None
         self.combat_system = AdaptiveCombatSystem()
@@ -558,7 +558,7 @@ class LowLightSLAMDemo:
 
 def create_lowlight_slam_demo():
     """Create low-light SLAM demonstration video"""
-    demo = LowLightSLAMDemo("lowlight_slam_professional_demo.mp4")
+    demo = LowLightSLAMDemo("demo_videos/lowlight_slam_professional_demo.mp4")
     demo.create_lowlight_demo()
     
     print("\n" + "="*70)

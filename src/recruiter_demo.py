@@ -30,7 +30,7 @@ class RecruiterDemo:
     Shows real-world combat scenarios and system performance
     """
     
-    def __init__(self, output_path: str = "combat_slam_recruiter_demo.mp4"):
+    def __init__(self, output_path: str = "demo_videos/combat_slam_recruiter_demo.mp4"):
         self.output_path = output_path
         self.video_writer = None
         self.combat_system = AdaptiveCombatSystem()
@@ -424,7 +424,7 @@ class RecruiterDemo:
 
 def create_recruiter_demo():
     """Create professional demo video for recruiters"""
-    demo = RecruiterDemo("combat_slam_professional_demo.mp4")
+    demo = RecruiterDemo("demo_videos/combat_slam_professional_demo.mp4")
     demo.create_professional_demo()
     
     print("\n" + "="*60)
