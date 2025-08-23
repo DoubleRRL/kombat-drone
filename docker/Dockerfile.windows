@@ -1,0 +1,77 @@
+# Multi-stage Windows Dockerfile for Combat-Ready SLAM + Thermal Detection
+# Supports both x86_64 and ARM64 architectures
+
+# Use Windows Server Core as base image
+FROM mcr.microsoft.com/windows/servercore:ltsc2022 AS base
+
+# Set working directory
+WORKDIR C:\\app
+
+# Install Chocolatey package manager
+RUN powershell -Command \
+    "Set-ExecutionPolicy Bypass -Scope Process -Force; \
+    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; \
+    iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
+
+# Install Python, Git, and Visual Studio Build Tools
+RUN choco install -y python3 git visualstudio2022buildtools --params "--add Microsoft.VisualStudio.Workload.VCTools"
+
+# Refresh environment variables
+RUN refreshenv
+
+# Verify installations
+RUN python --version && git --version
+
+# Development stage
+FROM base AS development
+
+# Install additional development tools
+RUN choco install -y cmake ninja
+
+# Copy requirements and install Python dependencies
+COPY requirements.txt .
+RUN python -m pip install --no-cache-dir --upgrade pip
+RUN python -m pip install --no-cache-dir -r requirements.txt
+
+# Install additional Windows-specific packages
+RUN python -m pip install --no-cache-dir pywin32 wmi
+
+# Copy source code
+COPY src/ ./src/
+COPY scripts/ ./scripts/
+COPY tests/ ./tests/
+COPY docker/entrypoint.bat ./
+
+# Set environment variables for CUDA (if available)
+ENV CUDA_VISIBLE_DEVICES=all
+ENV TORCH_CUDA_ARCH_LIST="6.0;6.1;7.0;7.5;8.0;8.6"
+
+# Production stage
+FROM development AS production
+
+# Copy datasets (optional, can be mounted)
+COPY datasets/ ./datasets/
+
+# Run tests to validate installation
+RUN python -m pytest tests/ -v
+
+# Set default command
+CMD ["python", "src/main.py", "--demo"]
+
+# Runtime stage for minimal deployment
+FROM mcr.microsoft.com/windows/nanoserver:ltsc2022 AS runtime
+
+# Copy only necessary runtime files
+WORKDIR C:\\app
+COPY --from=production C:\\app\\src C:\\app\\src
+COPY --from=production C:\\Python* C:\\Python
+
+# Set PATH to include Python
+ENV PATH="C:\\Python;C:\\Python\\Scripts;${PATH}"
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD python -c "import torch; import ultralytics; print('System ready')" || exit 1
+
+# Default command
+CMD ["python", "src\\main.py", "--demo"]

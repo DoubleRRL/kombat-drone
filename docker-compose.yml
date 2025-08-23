@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # Development environment
+  dev:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dev
+      target: dev
+    volumes:
+      - .:/app
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    environment:
+      - DISPLAY=${DISPLAY}
+      - PYTHONPATH=/app/src
+    ports:
+      - "8888:8888"  # Jupyter
+      - "5000:5000"  # Development server
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+    networks:
+      - thermal-slam-net
+
+  # Production environment  
+  prod:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dev
+      target: prod
+    volumes:
+      - ./data:/app/data:ro
+      - ./results:/app/results
+    environment:
+      - PYTHONPATH=/app/src
+    networks:
+      - thermal-slam-net
+    restart: unless-stopped
+
+  # Jupyter notebook server
+  jupyter:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dev
+      target: dev
+    volumes:
+      - .:/app
+    ports:
+      - "8888:8888"
+    environment:
+      - PYTHONPATH=/app/src
+    command: >
+      bash -c "jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''"
+    networks:
+      - thermal-slam-net
+
+  # Testing environment
+  test:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dev
+      target: dev
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONPATH=/app/src
+    command: pytest tests/ -v --cov=src --cov-report=html
+    networks:
+      - thermal-slam-net
+
+networks:
+  thermal-slam-net:
+    driver: bridge
