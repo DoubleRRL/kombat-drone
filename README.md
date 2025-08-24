@@ -32,6 +32,10 @@ Real-time autonomous navigation and target detection for contested environments.
 
 ### 🔥 Live Thermal Detection Test (NEW)
 **Real-time thermal target detection on FLIR ADAS dataset:**
+
+[![Thermal Detection Demo](test_videos/thermal_thumbnail.jpg)](test_videos/thermal_test_detected.mp4)
+*Click thumbnail to view annotated thermal detection results*
+
 ```bash
 # Create thermal test video from FLIR dataset
 python create_thermal_test_video.py --max-frames 50 --fps 10
