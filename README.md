@@ -33,7 +33,7 @@ Real-time autonomous navigation and target detection for contested environments.
 ### 🔥 Live Thermal Detection Test (NEW)
 **Real-time thermal target detection on FLIR ADAS dataset:**
 
-[![Thermal Detection Demo](test_videos/thermal_thumbnail.jpg)](test_videos/thermal_test_detected.mp4)
+![Thermal Detection Demo](test_videos/thermal_demo.gif)
 *Click thumbnail to view annotated thermal detection results*
 
 ```bash
@@ -53,6 +53,26 @@ python src/video_processor_gui.py
 - ✅ **Validated Performance**: 82% mAP on thermal signatures, 390+ FPS processing
 
 **Output**: `test_videos/thermal_test_detected.mp4` - **Annotated thermal detection results**
+
+### 🗺️ SLAM Pipeline Performance Demo (NEW)
+**Visual SLAM trajectory tracking on TUM RGB-D dataset:**
+
+![SLAM Demo](test_videos/slam_demo.gif)
+*Live SLAM tracking showing feature detection and trajectory estimation*
+
+```bash
+# Create SLAM demonstration video from TUM dataset
+python create_slam_demo.py --max-frames 60 --fps 8
+
+# Shows: ORB feature tracking, trajectory plot, performance metrics
+```
+
+**SLAM Demo Features:**
+- ✅ **ORB Feature Tracking**: Live feature detection and matching visualization
+- ✅ **Trajectory Estimation**: Real-time path reconstruction and plotting  
+- ✅ **Performance Metrics**: ATE error, tracking success rate, system status
+- ✅ **TUM Dataset Integration**: Uses standard RGB-D benchmark sequences
+- ✅ **Professional Visualization**: Side-by-side feature tracking and trajectory plot
 
 ### 🌙 Low-Light SLAM Demonstration (RECOMMENDED)
 **Shows the critical value of thermal-visual SLAM in contested environments:**
