@@ -28,27 +28,44 @@ Real-time autonomous navigation and target detection for contested environments.
 
 *Digital value 200 ≠ 200°C (which would be fatal!) - it represents normal human body temperature.*
 
-## Demo videos
+## Demo Videos
 
-### Thermal demos
-- ![Thermal Demos Preview](test_videos/thermal_demo.gif)
-- [FLIR annotated - cars](test_videos/flir_annotated/flir_cars_annotated.mp4)
-- [FLIR annotated - people](test_videos/flir_annotated/flir_people_annotated.mp4)
-- [FLIR annotated - driving](test_videos/flir_annotated/flir_driving_annotated.mp4)
-- [FLIR annotated - urban](test_videos/flir_annotated/flir_urban_annotated.mp4)
-- [FLIR annotated - highway](test_videos/flir_annotated/flir_highway_annotated.mp4)
-- [FLIR annotated - night](test_videos/flir_annotated/flir_night_annotated.mp4)
-- [FLIR annotated - parking](test_videos/flir_annotated/flir_parking_annotated.mp4)
-- [FLIR annotated - intersection](test_videos/flir_annotated/flir_intersection_annotated.mp4)
-- [FLIR annotated - extra](test_videos/flir_annotated/flir_extra_annotated.mp4)
+### Thermal Detection Demos
+**Real-time thermal target detection with YOLO annotations:**
 
-### SLAM demos
-- euroc mav0 real slam: test_videos/euroc_real_slam/euroc_mav0_real_slam.mp4
-- euroc mav0-1 real slam: test_videos/euroc_real_slam/euroc_mav0-1_real_slam.mp4
-- euroc mav0-2 real slam: test_videos/euroc_real_slam/euroc_mav0-2_real_slam.mp4
-- euroc mav0-3 real slam: test_videos/euroc_real_slam/euroc_mav0-3_real_slam.mp4
-- euroc mav0-4 real slam: test_videos/euroc_real_slam/euroc_mav0-4_real_slam.mp4
-- euroc mav0-5 real slam: test_videos/euroc_real_slam/euroc_mav0-5_real_slam.mp4
+![Thermal Detection Preview](test_videos/thermal_demo.gif)
+*Live thermal detection demo with bounding boxes and confidence scores*
+
+**FLIR Dataset Annotated Videos:**
+- ![Cars Detection](test_videos/flir_annotated_gifs/flir_cars_annotated.gif) **Cars** - Vehicle detection in thermal imagery
+- ![People Detection](test_videos/flir_annotated_gifs/flir_people_annotated.gif) **People** - Personnel tracking with thermal signatures  
+- ![Driving Scenes](test_videos/flir_annotated_gifs/flir_driving_annotated.gif) **Driving** - Road scene analysis and vehicle tracking
+- ![Urban Environment](test_videos/flir_annotated_gifs/flir_urban_annotated.gif) **Urban** - City environment thermal monitoring
+- ![Highway Traffic](test_videos/flir_annotated_gifs/flir_highway_annotated.gif) **Highway** - High-speed traffic thermal detection
+- ![Night Operations](test_videos/flir_annotated_gifs/flir_night_annotated.gif) **Night** - Low-light thermal surveillance
+- ![Parking Areas](test_videos/flir_annotated_gifs/flir_parking_annotated.gif) **Parking** - Static vehicle detection and monitoring
+- ![Intersections](test_videos/flir_annotated_gifs/flir_intersection_annotated.gif) **Intersections** - Traffic flow thermal analysis
+- ![General Scenes](test_videos/flir_annotated_gifs/flir_general_annotated.gif) **General** - Mixed environment thermal detection
+- ![Traffic Monitoring](test_videos/flir_annotated_gifs/flir_traffic_annotated.gif) **Traffic** - Comprehensive traffic thermal surveillance
+
+### SLAM Pipeline Demos
+**Real-time Simultaneous Localization and Mapping with Euroc dataset:**
+
+**Euroc MAV Dataset Real SLAM Videos:**
+- ![MAV0 SLAM](test_videos/euroc_real_slam_gifs/euroc_mav0_real_slam.gif) **MAV0** - Machine Hall Easy sequence with real IMU data
+- ![MAV0-1 SLAM](test_videos/euroc_real_slam_gifs/euroc_mav0-1_real_slam.gif) **MAV0-1** - Machine Hall Medium sequence with ground truth trajectory
+- ![MAV0-2 SLAM](test_videos/euroc_real_slam_gifs/euroc_mav0-2_real_slam.gif) **MAV0-2** - Machine Hall Difficult sequence with feature tracking
+- ![MAV0-3 SLAM](test_videos/euroc_real_slam_gifs/euroc_mav0-3_real_slam.gif) **MAV0-3** - Vicon Room Easy sequence with motion vectors
+- ![MAV0-4 SLAM](test_videos/euroc_real_slam_gifs/euroc_mav0-4_real_slam.gif) **MAV0-4** - Vicon Room Medium sequence with trajectory estimation
+- ![MAV0-5 SLAM](test_videos/euroc_real_slam_gifs/euroc_mav0-5_real_slam.gif) **MAV0-5** - Vicon Room Difficult sequence with performance metrics
+
+**SLAM Features Demonstrated:**
+- ✅ **Real IMU Data Integration** - Actual sensor data from Euroc dataset
+- ✅ **Ground Truth Trajectory** - Precise position tracking with ATE metrics
+- ✅ **Feature Point Detection** - ORB-SLAM3 feature extraction and matching
+- ✅ **Motion Vector Visualization** - Real-time movement analysis
+- ✅ **Performance Metrics** - ATE error and mAP accuracy display
+- ✅ **Multi-Sequence Support** - Easy/Medium/Difficult difficulty levels
 
 ### 🌙 Low-Light SLAM Demonstration (RECOMMENDED)
 **Shows the critical value of thermal-visual SLAM in contested environments:**
