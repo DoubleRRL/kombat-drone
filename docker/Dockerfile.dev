@@ -1,0 +1,87 @@
+# Development Docker image for thermal SLAM pipeline
+# Multi-stage build for efficient development workflow
+
+FROM python:3.11-slim as base
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    git \
+    libopencv-dev \
+    libeigen3-dev \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libgomp1 \
+    wget \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Development stage with additional tools
+FROM base as dev
+
+# Install development tools
+RUN pip install --no-cache-dir \
+    jupyter \
+    ipython \
+    black \
+    flake8 \
+    pytest \
+    pytest-cov \
+    pre-commit
+
+# Install additional CV libraries
+RUN pip install --no-cache-dir \
+    matplotlib \
+    seaborn \
+    plotly \
+    scikit-learn
+
+# Create non-root user for development
+RUN useradd -m -s /bin/bash developer && \
+    chown -R developer:developer /app
+
+USER developer
+
+# Set environment variables
+ENV PYTHONPATH=/app/src
+ENV OPENCV_LOG_LEVEL=ERROR
+
+# Expose ports for Jupyter and development servers
+EXPOSE 8888 5000
+
+# Default command for development
+CMD ["/bin/bash"]
+
+# Production stage (minimal runtime)
+FROM base as prod
+
+# Copy source code
+COPY src/ /app/src/
+COPY data/models/ /app/data/models/
+
+# Create non-root user for production
+RUN useradd -m -s /bin/bash appuser && \
+    chown -R appuser:appuser /app
+
+USER appuser
+
+# Set environment variables
+ENV PYTHONPATH=/app/src
+ENV OPENCV_LOG_LEVEL=ERROR
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import src.main; print('OK')" || exit 1
+
+# Default command for production
+CMD ["python", "src/main.py", "--demo"]
