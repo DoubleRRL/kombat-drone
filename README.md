@@ -28,51 +28,27 @@ Real-time autonomous navigation and target detection for contested environments.
 
 *Digital value 200 ≠ 200°C (which would be fatal!) - it represents normal human body temperature.*
 
-## 🎬 Professional Demo Videos
+## Demo videos
 
-### 🔥 Live Thermal Detection Test (NEW)
-**Real-time thermal target detection on FLIR ADAS dataset:**
+### Thermal demos
+- ![Thermal Demos Preview](test_videos/thermal_demo.gif)
+- [FLIR annotated - cars](test_videos/flir_annotated/flir_cars_annotated.mp4)
+- [FLIR annotated - people](test_videos/flir_annotated/flir_people_annotated.mp4)
+- [FLIR annotated - driving](test_videos/flir_annotated/flir_driving_annotated.mp4)
+- [FLIR annotated - urban](test_videos/flir_annotated/flir_urban_annotated.mp4)
+- [FLIR annotated - highway](test_videos/flir_annotated/flir_highway_annotated.mp4)
+- [FLIR annotated - night](test_videos/flir_annotated/flir_night_annotated.mp4)
+- [FLIR annotated - parking](test_videos/flir_annotated/flir_parking_annotated.mp4)
+- [FLIR annotated - intersection](test_videos/flir_annotated/flir_intersection_annotated.mp4)
+- [FLIR annotated - extra](test_videos/flir_annotated/flir_extra_annotated.mp4)
 
-![Thermal Detection Demo](test_videos/thermal_demo.gif)
-*Click thumbnail to view annotated thermal detection results*
-
-```bash
-# Create thermal test video from FLIR dataset
-python create_thermal_test_video.py --max-frames 50 --fps 10
-
-# Process with GUI (shows annotated output)
-python src/video_processor_gui.py
-# Browse to: test_videos/thermal_test.mp4
-```
-
-**Live Detection Features:**
-- ✅ **Real FLIR Thermal Data**: Actual temperature-based signatures, not fake grayscale
-- ✅ **Transfer-Learned YOLO**: Model fine-tuned on this exact dataset type
-- ✅ **Live Annotations**: Bounding boxes, confidence scores, thermal temperatures
-- ✅ **Professional GUI**: User-friendly interface for testing and demonstration
-- ✅ **Validated Performance**: 82% mAP on thermal signatures, 390+ FPS processing
-
-**Output**: `test_videos/thermal_test_detected.mp4` - **Annotated thermal detection results**
-
-### 🗺️ SLAM Pipeline Performance Demo (NEW)
-**Visual SLAM trajectory tracking on TUM RGB-D dataset:**
-
-![SLAM Demo](test_videos/slam_demo.gif)
-*Live SLAM tracking showing feature detection and trajectory estimation*
-
-```bash
-# Create SLAM demonstration video from TUM dataset
-python create_slam_demo.py --max-frames 60 --fps 8
-
-# Shows: ORB feature tracking, trajectory plot, performance metrics
-```
-
-**SLAM Demo Features:**
-- ✅ **ORB Feature Tracking**: Live feature detection and matching visualization
-- ✅ **Trajectory Estimation**: Real-time path reconstruction and plotting  
-- ✅ **Performance Metrics**: ATE error, tracking success rate, system status
-- ✅ **TUM Dataset Integration**: Uses standard RGB-D benchmark sequences
-- ✅ **Professional Visualization**: Side-by-side feature tracking and trajectory plot
+### SLAM demos
+- euroc mav0 real slam: test_videos/euroc_real_slam/euroc_mav0_real_slam.mp4
+- euroc mav0-1 real slam: test_videos/euroc_real_slam/euroc_mav0-1_real_slam.mp4
+- euroc mav0-2 real slam: test_videos/euroc_real_slam/euroc_mav0-2_real_slam.mp4
+- euroc mav0-3 real slam: test_videos/euroc_real_slam/euroc_mav0-3_real_slam.mp4
+- euroc mav0-4 real slam: test_videos/euroc_real_slam/euroc_mav0-4_real_slam.mp4
+- euroc mav0-5 real slam: test_videos/euroc_real_slam/euroc_mav0-5_real_slam.mp4
 
 ### 🌙 Low-Light SLAM Demonstration (RECOMMENDED)
 **Shows the critical value of thermal-visual SLAM in contested environments:**
