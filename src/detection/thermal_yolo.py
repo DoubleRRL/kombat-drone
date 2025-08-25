@@ -216,8 +216,12 @@ class ThermalYOLO:
         """
         start_time = time.time()
         
-        # Preprocess thermal image
-        processed_frame = self.preprocessor.normalize(thermal_frame)
+        # Preprocess thermal image (skip if it fails)
+        try:
+            processed_frame = self.preprocessor.normalize(thermal_frame)
+        except Exception as e:
+            print(f"Preprocessing failed, using original frame: {e}")
+            processed_frame = thermal_frame
         
         # Set confidence threshold
         conf_thresh = confidence_threshold or self.confidence_threshold
